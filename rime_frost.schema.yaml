@@ -162,6 +162,7 @@ pin_cand_filter:
    - l	了
    - z	在
    - m	吗
+   - w	我
 
 # 主翻译器，拼音
 translator:
