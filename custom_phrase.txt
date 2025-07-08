@@ -45,4 +45,4 @@ KoreaTest	kt
 Unity	un
 bug	bug
 PreKoreaRelease	pre
-CheatEngine	ce
+CheatEngine	che
