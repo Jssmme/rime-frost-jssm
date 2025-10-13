@@ -241,6 +241,11 @@ key_binder:
     - {accept: KP_9, send: 9, when: composing}
     - {accept: KP_Decimal, send: period, when: composing}
     - {accept: KP_Enter, send: Return, when: composing}
+    - {accept: KP_Add, send: plus, when: composing}
+    - {accept: KP_Subtract, send: minus, when: composing}
+    - {accept: KP_Multiply, send: asterisk, when: composing}
+    - {accept: KP_Divide, send: slash, when: composing}
+    - {accept: KP_Equal, send: equal, when: composing}
 
 
 # 按键速查

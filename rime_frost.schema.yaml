@@ -30,9 +30,9 @@ switches:
     states: [ ¥, $ ]
   - name: traditionalization
     states: [ 简, 繁 ]
-#  - name: emoji
-#    states: [ 💀, 😄 ]
-#    reset: 1
+  - name: emoji
+    states: [ 💀, 😄 ]
+    reset: 1
   - name: full_shape
     states: [ 半角, 全角 ]
   - name: search_single_char  # search.lua 的功能开关，辅码查词时是否单字优先
@@ -81,7 +81,7 @@ engine:
     - lua_filter@*pin_cand_filter                    # 置顶候选项（顺序要求：置顶候选项 > Emoji > 简繁切换）
     - lua_filter@*long_word_filter                   # 长词优先（顺序要求：长词优先 > Emoji）
     - lua_filter@*reduce_english_filter              # 降低部分英语单词在候选项的位置
-#    - simplifier@emoji                              # Emoji
+    - simplifier@emoji                              # Emoji
     - simplifier@traditionalize                     # 简繁切换
     - lua_filter@*aux_code                 # 墨奇辅助码
     - uniquifier                                    # 去重
@@ -214,10 +214,10 @@ custom_phrase:
 
 
 # Emoji
-#emoji:
-#  option_name: emoji
-#  opencc_config: emoji.json
-#  inherit_comment: false  # 在 corrector.lua 及反查中，emoji 返回空注释
+emoji:
+  option_name: emoji
+  opencc_config: emoji.json
+  inherit_comment: false  # 在 corrector.lua 及反查中，emoji 返回空注释
 
 
 # 简繁切换
@@ -271,7 +271,7 @@ recognizer:
     unicode: "^U[a-f0-9]+"              # 脚本将自动获取第 2 个字符 U 作为触发前缀，响应 lua_translator@*unicode，输出 Unicode 字符
     number: "^R[0-9]+[.]?[0-9]*"        # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@*number_translator，数字金额大写
     gregorian_to_lunar: "^N[0-9]{1,8}"  # 脚本将自动获取第 2 个字符 N 作为触发前缀，响应 lua_translator@*lunar，公历转农历，输入 N20240115 得到「二〇二三年腊月初五」
-    calculator: "^V.*$"                 #计算器功能引导
+    calculator: "^vv.*$"                #计算器功能引导
 
 # 从 default 继承快捷键
 key_binder:

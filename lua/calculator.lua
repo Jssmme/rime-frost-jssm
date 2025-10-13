@@ -5,7 +5,7 @@ local M = {}
 function M.init(env)
   local config = env.engine.schema.config
   env.name_space = env.name_space:gsub('^*', '')
-  M.prefix = config:get_string(env.name_space .. '/trigger') or 'V'
+  M.prefix = config:get_string(env.name_space .. '/trigger') or 'vv'
 end
 
 local function startsWith(str, start)
