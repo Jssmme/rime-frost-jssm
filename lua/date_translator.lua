@@ -17,6 +17,7 @@ function M.init(env)
     M.week = config:get_string(env.name_space .. '/week') or 'xq'
     M.datetime = config:get_string(env.name_space .. '/datetime') or 'dt'
     M.timestamp = config:get_string(env.name_space .. '/timestamp') or 'ts'
+    M.lynch = config:get_string(env.name_space .. '/lynch') or 'ly'
 end
 
 function M.func(input, seg, env)
@@ -32,6 +33,7 @@ function M.func(input, seg, env)
     -- 时间
     elseif (input == M.time) then
         local current_time = os.time()
+        yield_cand(seg, os.date('%Y-%m-%d %H:%M:%S', current_time))
         yield_cand(seg, os.date('%H:%M', current_time))
         yield_cand(seg, os.date('%H:%M:%S', current_time))
 
@@ -47,16 +49,23 @@ function M.func(input, seg, env)
     -- ISO 8601/RFC 3339 的时间格式 （固定东八区）（示例 2022-01-07T20:42:51+08:00）
     elseif (input == M.datetime) then
         local current_time = os.time()
-        yield_cand(seg, os.date('%Y-%m-%dT%H:%M:%S+08:00', current_time))
         yield_cand(seg, os.date('%Y-%m-%d %H:%M:%S', current_time))
+        yield_cand(seg, os.date('%Y-%m-%dT%H:%M:%S+08:00', current_time))
         yield_cand(seg, os.date('%Y%m%d%H%M%S', current_time))
 
     -- 时间戳（十位数，到秒，示例 1650861664）
     elseif (input == M.timestamp) then
         local current_time = os.time()
         yield_cand(seg, string.format('%d', current_time))
-    end
 
+    -- lynch
+    elseif (input == M.lynch) then
+       local current_time = os.time()
+       local month = os.date('%m', current_time) -- 当前月份，格式为两位数
+       local day = os.date('%d', current_time) -- 当前日期，格式为两位数
+       yield_cand(seg, string.format('%s%slynch：', month, day))
+    end
+    
     -- -- 显示内存
     -- local cand = Candidate("date", seg.start, seg._end, ("%.f"):format(collectgarbage('count')), "")
     -- cand.quality = 100
